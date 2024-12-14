@@ -26,7 +26,7 @@ export async function POST(req: NextRequest) {
     });
 
     await newUser.save();
-    return NextResponse.json({ message: 'User created successfully' }, { status: 201 });
+    return NextResponse.json({ message: 'User created successfully ' }, { status: 201 });
   } catch (err) {
     return NextResponse.json({ message: 'Internal Server Error', err }, { status: 500 });
   }
