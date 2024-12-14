@@ -2,9 +2,9 @@ import React from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { formRegisterSchema, FormRegisterSchema } from "./schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Title } from "@/shared/components/title";
+import { Title } from "@/shared/components/ui/title";
 import { Button } from "@/shared/components/ui/button";
-import { FormInput } from "@/shared/components/form-input";
+import { FormInput } from "@/shared/components/form-input/form-input";
 import { regUser } from "@/shared/services/user";
 import toast from "react-hot-toast";
 

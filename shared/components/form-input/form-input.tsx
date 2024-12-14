@@ -1,6 +1,6 @@
 import React from "react";
 import { RequiredSymbol } from "./required-symbol";
-import { Input } from "./ui/input";
+import { Input } from "../ui/input";
 import { ClearButton } from "./clear-buttom";
 import { useFormContext } from "react-hook-form";
 import { ErrorText } from "./error-text";
