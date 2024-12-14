@@ -2,20 +2,117 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+html {
+  scroll-behavior: smooth;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@media screen and (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
   }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+@layer base {
+  :root {
+    --background: 240 100% 98%; /* Светлый синий фон */
+    --foreground: 240 10% 20%; /* Темный текст */
+    --card: 240 100% 100%; /* Белый цвет карточек */
+    --card-foreground: 240 10% 20%; /* Темный текст для карточек */
+    --popover: 240 100% 98%; /* Светлый фон для попапов */
+    --popover-foreground: 240 10% 20%; /* Темный текст для попапов */
+    --primary: 220 90% 56%; /* Ярко-синий основной цвет */
+    --primary-foreground: 240 100% 98%; /* Белый текст на кнопках */
+    --secondary: 240 80% 94%; /* Светло-синий цвет */
+    --secondary-foreground: 240 10% 20%; /* Темный текст */
+    --muted: 240 80% 94%; /* Светлый цвет для muted элементов */
+    --muted-foreground: 240 15% 50%; /* Темно-синий текст */
+    --accent: 220 90% 56%; /* Ярко-синий акцент */
+    --accent-foreground: 240 100% 98%; /* Белый текст на акцентах */
+    --destructive: 0 84% 62%; /* Красный для destructive элементов */
+    --destructive-foreground: 240 100% 98%; /* Белый текст */
+    --border: 240 20% 85%; /* Светло-синий бордер */
+    --input: 240 20% 95%; /* Белый фон для инпутов */
+    --ring: 220 90% 56%; /* Синий акцент кольца */
+    --radius: 0.5rem; /* Радиус скругления */
+    --chart-1: 220 70% 60%;
+    --chart-2: 210 60% 50%;
+    --chart-3: 200 50% 40%;
+    --chart-4: 190 40% 30%;
+    --chart-5: 180 30% 20%;
+  }
+
+  .dark {
+    --background: 240 10% 10%; /* Темно-синий фон */
+    --foreground: 240 60% 90%; /* Светлый текст */
+    --card: 240 10% 15%; /* Темный фон карточек */
+    --card-foreground: 240 60% 90%; /* Светлый текст на карточках */
+    --popover: 240 10% 15%; /* Темный фон для попапов */
+    --popover-foreground: 240 60% 90%; /* Светлый текст для попапов */
+    --primary: 220 90% 56%; /* Ярко-синий основной цвет */
+    --primary-foreground: 240 10% 10%; /* Темный текст */
+    --secondary: 240 15% 20%; /* Темно-синий цвет */
+    --secondary-foreground: 240 60% 90%; /* Светлый текст */
+    --muted: 240 15% 20%; /* Темный цвет для muted элементов */
+    --muted-foreground: 240 30% 70%; /* Светло-синий текст */
+    --accent: 220 90% 56%; /* Ярко-синий акцент */
+    --accent-foreground: 240 10% 10%; /* Темный текст на акцентах */
+    --destructive: 0 84% 42%; /* Темно-красный для destructive элементов */
+    --destructive-foreground: 240 60% 90%; /* Светлый текст */
+    --border: 240 15% 25%; /* Темный бордер */
+    --input: 240 15% 25%; /* Темный фон для инпутов */
+    --ring: 220 90% 56%; /* Синий акцент кольца */
+    --radius: 0.5rem; /* Радиус скругления */
+    --chart-1: 220 70% 60%;
+    --chart-2: 210 60% 50%;
+    --chart-3: 200 50% 40%;
+    --chart-4: 190 40% 30%;
+    --chart-5: 180 30% 20%;
+  }
+}
+* {
+  font-family: var(--font-nunito), sans-serif;
+}
+
+.scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+
+.scrollbar::-webkit-scrollbar-track {
+  border-radius: 6px;
+  background: #fff;
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+  background: #dbdadd;
+  border-radius: 6px;
+}
+
+.scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #dbdadd;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+#nprogress .bar {
+  @apply bg-primary !important;
+}
+
+#nprogress .peg {
+  @apply shadow-md shadow-primary !important;
+}
+
+#nprogress .spinner-icon {
+  @apply border-t-primary border-l-primary !important;
 }
