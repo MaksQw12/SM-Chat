@@ -5,6 +5,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Title } from "@/shared/components/title";
 import { Button } from "@/shared/components/ui/button";
 import { FormInput } from "@/shared/components/form-input";
+import { regUser } from "@/shared/services/user";
+import toast from "react-hot-toast";
 
 interface Props {
   onClose: () => void;
@@ -20,7 +22,16 @@ export const RegisterForm: React.FC<Props> = ({ onClose }) => {
     },
   });
   const onSubmit = async (data: FormRegisterSchema) => {
-    console.log(data);
+    try {
+        const resp = await regUser(data.email, data.password);
+    if (resp.status !== 201) throw Error("");
+    onClose?.();
+    toast.success("Вы успешно зарегистрировались" , {icon: "👋"});
+    } catch (error) {
+        console.log("Error [REGISTER]: ",error)
+        toast.error("Неправильная почта или пароль" , {icon: "❌"});
+    }
+    
   };
   return (
     <FormProvider {...form}>

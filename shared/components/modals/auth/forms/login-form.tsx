@@ -5,6 +5,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Title } from "@/shared/components/title";
 import { FormInput } from "@/shared/components/form-input";
 import { Button } from "@/shared/components/ui/button";
+import { loginUser } from "@/shared/services/user";
+import toast from "react-hot-toast";
 
 interface Props {
   onClose: () => void;
@@ -19,7 +21,15 @@ export const LoginForm: React.FC<Props> = ({ onClose }) => {
     },
   });
   const onSubmit = async (data: FormLoginSchema) => {
-    console.log(data);
+    try {
+      const resp = await loginUser(data.email, data.password);
+      if(resp.status !== 200) throw Error();
+      onClose?.();
+      toast.success("Вы успешно вошли в аккаунт" , {icon: "👋"});
+    } catch (error) {
+        console.log("Error [LOGIN]: ", error)
+      toast.error("Неправильная почта или пароль" , {icon: "❌"});
+    }
   };
   return (
     <FormProvider {...form}>
