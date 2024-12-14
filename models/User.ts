@@ -11,6 +11,14 @@ const UserSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    isOnline: {
+      type: Boolean,
+      default: false,
+    },
+    avatar: {
+      type: String,
+      default: '/some-image.png',
+    },
   },
   {
     timestamps: true,
