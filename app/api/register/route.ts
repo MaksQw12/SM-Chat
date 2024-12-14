@@ -33,3 +33,5 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ message: 'Internal Server Error', err }, { status: 500 });
   }
 }
+
+// [Регистрация]
