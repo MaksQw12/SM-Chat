@@ -28,8 +28,8 @@ export const AuthModal: React.FC<Props> = ({ open, onClose }) => {
             <RegisterForm onClose={handleClose} />
           )}
           <hr />
-          <Button className="mt-3" onClick={onSwitchType}>
-            {type === "login" ? "Регистрация" : "Войти"}
+          <Button variant={'secondary'} className="mt-3 w-full text-base h-[48px]" onClick={onSwitchType}>
+            {type === "login" ? "Зарегистрироваться" : "Войти"}
           </Button>
         </DialogTitle>
       </DialogContent>

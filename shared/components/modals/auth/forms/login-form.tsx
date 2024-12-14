@@ -37,12 +37,19 @@ export const LoginForm: React.FC<Props> = ({ onClose }) => {
         className="flex flex-col gap-5"
         onSubmit={form.handleSubmit(onSubmit)}
       >
-        <div className="flex justify-between items-center">
-          <Title text="Вход в аккаунт" size="md" className="font-bold" />
-          <p className="text-gray-400">
-            Введите свое имя пользователя, чтобы войти в свой аккаунт
-          </p>
+       <div className="flex flex-col">
+       <div className="flex justify-between items-center">
+          <div className="flex flex-col">
+            <Title text="Вход в аккаунт" size="md" className="font-bold mb-4" />
+            <p className="text-gray-400 text-base">
+              Введите свое имя пользователя, чтобы войти в свой аккаунт.
+            </p>
+          </div>
+          <img src="auth.png" alt="auth" className="max-w-[150px]" />
         </div>
+
+        <span className="block h-1 bg-blue-500 my-4 mb-8"></span>
+       </div>
         <FormInput name="username" label="Имя пользователя" required />
         <FormInput name="password" label="Пароль" type="password" required />
         <Button className="h-12 text-base">Войти</Button>
