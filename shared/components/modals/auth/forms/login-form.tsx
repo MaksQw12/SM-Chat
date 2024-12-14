@@ -16,19 +16,19 @@ export const LoginForm: React.FC<Props> = ({ onClose }) => {
   const form = useForm<FormLoginSchema>({
     resolver: zodResolver(formLoginSchema),
     defaultValues: {
-      email: "",
+      username: "",
       password: "",
     },
   });
   const onSubmit = async (data: FormLoginSchema) => {
     try {
-      const resp = await loginUser(data.email, data.password);
-      if(resp.status !== 200) throw Error();
+      const resp = await loginUser(data.username, data.password);
+      if (resp.status !== 200) throw Error();
       onClose?.();
-      toast.success("Вы успешно вошли в аккаунт" , {icon: "👋"});
+      toast.success("Вы успешно вошли в аккаунт", { icon: "👋" });
     } catch (error) {
-        console.log("Error [LOGIN]: ", error)
-      toast.error("Неправильная почта или пароль" , {icon: "❌"});
+      console.log("Error [LOGIN]: ", error);
+      toast.error("Неправильное имя пользователя или пароль", { icon: "❌" });
     }
   };
   return (
@@ -40,10 +40,10 @@ export const LoginForm: React.FC<Props> = ({ onClose }) => {
         <div className="flex justify-between items-center">
           <Title text="Вход в аккаунт" size="md" className="font-bold" />
           <p className="text-gray-400">
-            Введите свою почту, чтобы войти в свой аккаунт{" "}
+            Введите свое имя пользователя, чтобы войти в свой аккаунт
           </p>
         </div>
-        <FormInput name="email" label="E-mail" required />
+        <FormInput name="username" label="Имя пользователя" required />
         <FormInput name="password" label="Пароль" type="password" required />
         <Button className="h-12 text-base">Войти</Button>
       </form>

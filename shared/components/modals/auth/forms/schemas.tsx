@@ -3,7 +3,7 @@ export const passwordSchema = z
   .string()
   .min(6, { message: "Пароль должен быть не менее 6 символов!" });
 export const formLoginSchema = z.object({
-  email: z.string().email({ message: "Введите корректную почту!" }),
+  username: z.string().min(6,{ message: "Имя пользователя должно содержать не менее 6 символов" }),
   password: passwordSchema,
 });
 export const formRegisterSchema = formLoginSchema
