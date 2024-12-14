@@ -5,6 +5,7 @@ import dbConnect from '@/shared/lib/dbConnect';
 import User from '@/models/User';
 
 const JWT_SECRET = process.env.JWT_SECRET || '';
+const JWT_REFRESH_SECRET = process.env.JWT_REFRESH_SECRET || '';
 
 export async function POST(req: NextRequest) {
   const { username, password } = await req.json();
@@ -27,12 +28,23 @@ export async function POST(req: NextRequest) {
     if (!isPasswordValid) {
       return NextResponse.json({ message: 'Invalid password' }, { status: 401 });
     }
+    await User.findOneAndUpdate({ _id: user._id }, { isOnline: true });
+    const accessToken = jwt.sign(
+      { userId: user._id, username: user.username, avatar: user.avatar, isOnline: true },
+      JWT_SECRET,
+      { expiresIn: '12h' },
+    );
 
-    const token = jwt.sign({ userId: user._id, username: user.username }, JWT_SECRET, {
-      expiresIn: '7d',
-    });
+    const refreshToken = jwt.sign(
+      { userId: user._id, username: user.username },
+      JWT_REFRESH_SECRET,
+      { expiresIn: '7d' },
+    );
 
-    return NextResponse.json({ message: 'Login successful', token }, { status: 200 });
+    return NextResponse.json(
+      { message: 'Login successful', accessToken, refreshToken },
+      { status: 200 },
+    );
   } catch (err) {
     return NextResponse.json({ message: 'Internal Server Error', err }, { status: 500 });
   }
