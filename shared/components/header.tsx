@@ -5,7 +5,10 @@ import { Container } from "./ui/container";
 import { Title } from "./ui/title";
 import { AuthModal } from "./modals/auth/auth-modal";
 import { Button } from "./ui/button";
-import { User } from "lucide-react";
+import { LogOut, User } from "lucide-react";
+import { logout } from "../lib/logout";
+import { DropdownMenu, DropdownMenuTrigger } from "./ui/dropdown-menu";
+import { useTokens } from "./hooks/useTokens";
 
 interface Props {
   className?: string;
@@ -13,6 +16,8 @@ interface Props {
 
 export const Header: React.FC<Props> = ({ className }) => {
   const [openAuthModal, setOpenAuthModal] = useState(false);
+  const [isAuth, setIsAuth] = useState(true);
+  const tokens = useTokens();
   return (
     <div
       className={cn(
@@ -28,15 +33,25 @@ export const Header: React.FC<Props> = ({ className }) => {
         </div>
         {/* Правая часть */}
         <div className="flex items-center">
-          {
-            <AuthModal
-              open={openAuthModal}
-              onClose={() => setOpenAuthModal(false)}
-            />
-          }
-          <Button variant={"default"} onClick={() => setOpenAuthModal(true)}>
-            <User className="mr-0" size={20}/> Войти
-          </Button>
+          {isAuth ? (
+            <DropdownMenu>
+              <DropdownMenuTrigger>{}</DropdownMenuTrigger>
+            </DropdownMenu>
+          ) : (
+            // Если пользователь гость
+            <>
+              <AuthModal
+                open={openAuthModal}
+                onClose={() => setOpenAuthModal(false)}
+              />
+              <Button
+                variant={"default"}
+                onClick={() => setOpenAuthModal(true)}
+              >
+                <User className="mr-0" size={20} /> Войти
+              </Button>
+            </>
+          )}
         </div>
       </Container>
     </div>
