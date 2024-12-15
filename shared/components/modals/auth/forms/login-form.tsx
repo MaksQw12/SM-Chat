@@ -25,9 +25,12 @@ export const LoginForm: React.FC<Props> = ({ onClose }) => {
     try {
       const resp = await loginUser(data.username, data.password);
       if (resp.status !== 200) throw Error();
-      if(!resp.data.accessToken || !resp.data.refreshToken) throw Error();
+      if (!resp.data.accessToken || !resp.data.refreshToken) throw Error();
       localStorage.setItem("accessToken", resp.data.accessToken);
       localStorage.setItem("refreshToken", resp.data.refreshToken);
+
+      window.dispatchEvent(new Event("storage"));
+
       onClose?.();
       toast.success("Вы успешно вошли в аккаунт", { icon: "👋" });
     } catch (error) {

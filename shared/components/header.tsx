@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 import { cn } from "../lib/utils";
 import { Container } from "./ui/container";
 import { Title } from "./ui/title";
@@ -12,44 +12,21 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
-import { useTokens } from "./hooks/useTokens";
-import { DecodedUser, decodeRefresh } from "../lib/decodeRefresh";
+import { useAuth } from "./hooks/useAuth";
+import { DecodedUser } from "../lib/decodeRefresh";
+
 
 interface Props {
   className?: string;
   isAuth?: boolean;
+  user?: DecodedUser | null;
+  logout?: () => void;
 }
 
-export const Header: React.FC<Props> = ({ className }) => {
+export const Header: React.FC<Props> = ({ className, isAuth, user, logout }) => {
   const [openAuthModal, setOpenAuthModal] = useState(false);
-  const [user, setUser] = useState<DecodedUser | null>(null);
-  const [isAuth, setIsAuth] = useState(false);
-  const tokens = useTokens();
 
-  useEffect(() => {
-    const fetchUserData = async () => {
-      try {
-        if (!tokens?.refreshToken) {
-          console.warn("Токены отсутствуют. Пользователь не авторизован.");
-          setIsAuth(false);
-          return;
-        }
-        const user = decodeRefresh(tokens.refreshToken);
-        setUser(user);
-        setIsAuth(true);
-      } catch (error) {
-        console.error("Ошибка при проверке пользователя:", error);
-        setIsAuth(false);
-      }
-    };
 
-    fetchUserData();
-  }, [tokens?.refreshToken]);
-  const logout = async () => {
-    localStorage.removeItem("accessToken");
-    localStorage.removeItem("refreshToken");
-    setIsAuth(false);
-  };
   return (
     <div
       className={cn(
@@ -70,7 +47,7 @@ export const Header: React.FC<Props> = ({ className }) => {
         <div className="flex items-center">
           {isAuth ? (
             <DropdownMenu>
-               <DropdownMenuTrigger className="text-lg flex items-center cursor-pointer hover:bg-[hsl(38,56%,81%)] transition ease-in-out duration-300 px-2 py-1 rounded-lg">
+              <DropdownMenuTrigger className="text-lg flex items-center cursor-pointer hover:bg-[hsl(38,56%,81%)] transition ease-in-out duration-300 px-2 py-1 rounded-lg">
                 <img
                   src="profile-user.png "
                   alt="profile"
@@ -79,9 +56,18 @@ export const Header: React.FC<Props> = ({ className }) => {
                 {user?.username}
               </DropdownMenuTrigger>
               <DropdownMenuContent>
-                <DropdownMenuItem><CircleUserRound />Профиль</DropdownMenuItem>
-                <DropdownMenuItem><Settings />Настройки</DropdownMenuItem>
-                <DropdownMenuItem onClick={logout}><LogOut />Выйти</DropdownMenuItem>
+                <DropdownMenuItem>
+                  <CircleUserRound />
+                  Профиль
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <Settings />
+                  Настройки
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={logout}>
+                  <LogOut />
+                  Выйти
+                </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
           ) : (

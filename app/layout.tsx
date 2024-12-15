@@ -3,7 +3,6 @@ import { Roboto } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "react-hot-toast";
 
-
 const roboto = Roboto({
   variable: "--font-roboto",
   subsets: ["latin", "cyrillic"], // Подключение кириллицы
@@ -24,7 +23,6 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={roboto.variable}>
-        
         {children}
         <Toaster />
         {modal}

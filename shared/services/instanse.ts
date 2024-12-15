@@ -20,7 +20,7 @@ axiosInstance.interceptors.response.use(
           throw new Error("Refresh token отсутствует");
         }
 
-        const { data } = await axiosInstance.post("/refresh", { refreshToken });
+        const { data } = await axiosInstance.post("/refreshToken", { refreshToken });
 
         localStorage.setItem("accessToken", data.accessToken);
 

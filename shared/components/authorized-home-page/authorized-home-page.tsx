@@ -6,12 +6,12 @@ interface Props {
   className?: string;
 }
 
-export const GuestHomePage: React.FC<Props> = ({ className }) => {
+export const AuthorizedHomePage: React.FC<Props> = ({ className }) => {
   return (
     <div className={cn("flex flex-col", className)}>
       <div>
         <Container>
-          <h1>Guest Home Page</h1>
+          <h1>Authorize Home Page</h1>
         </Container>
       </div>
     </div>
