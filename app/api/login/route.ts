@@ -36,7 +36,7 @@ export async function POST(req: NextRequest) {
     );
 
     const refreshToken = jwt.sign(
-      { userId: user._id, username: user.username },
+      { userId: user._id, username: user.username, avatar: user.avatar, isOnline: true },
       JWT_REFRESH_SECRET,
       { expiresIn: '7d' },
     );
