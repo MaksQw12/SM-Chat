@@ -20,7 +20,7 @@ export async function POST(req: NextRequest) {
     const decoded = jwt.verify(refreshToken, JWT_REFRESH_SECRET) as JwtPayloadWithUserId;
 
     const accessToken = jwt.sign(
-      { userId: decoded.userId, username: decoded.username },
+      { userId: decoded.userId, username: decoded.username, avatar: decoded.avatar },
       JWT_SECRET,
       { expiresIn: '2m' },
     );
