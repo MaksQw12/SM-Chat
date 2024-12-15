@@ -32,11 +32,11 @@ export async function POST(req: NextRequest) {
     const accessToken = jwt.sign(
       { userId: user._id, username: user.username, avatar: user.avatar, isOnline: true },
       JWT_SECRET,
-      { expiresIn: '12h' },
+      { expiresIn: '2m' },
     );
 
     const refreshToken = jwt.sign(
-      { userId: user._id, username: user.username },
+      { userId: user._id, username: user.username, avatar: user.avatar, isOnline: true },
       JWT_REFRESH_SECRET,
       { expiresIn: '7d' },
     );
