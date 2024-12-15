@@ -22,7 +22,7 @@ export async function POST(req: NextRequest) {
     const accessToken = jwt.sign(
       { userId: decoded.userId, username: decoded.username },
       JWT_SECRET,
-      { expiresIn: '12h' },
+      { expiresIn: '2m' },
     );
 
     return NextResponse.json({ accessToken }, { status: 200 });
