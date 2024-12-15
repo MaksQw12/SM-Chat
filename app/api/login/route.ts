@@ -11,7 +11,7 @@ export async function POST(req: NextRequest) {
   const { username, password } = await req.json();
 
   if (!username || !password) {
-    return NextResponse.json({ message: 'Name and password are required' }, { status: 400 });
+    return NextResponse.json({ message: 'Username and password are required' }, { status: 400 });
   }
 
   try {
@@ -20,7 +20,8 @@ export async function POST(req: NextRequest) {
     const user = await User.findOne({ username });
 
     if (!user) {
-      return NextResponse.json({ message: 'User not found' }, { status: 404 });
+      // Возвращаем ошибку 401, если пользователь не найден
+      return NextResponse.json({ message: 'User not found' }, { status: 401 });
     }
 
     const isPasswordValid = await bcrypt.compare(password, user.password);
@@ -28,7 +29,9 @@ export async function POST(req: NextRequest) {
     if (!isPasswordValid) {
       return NextResponse.json({ message: 'Invalid password' }, { status: 401 });
     }
+
     await User.findOneAndUpdate({ _id: user._id }, { isOnline: true });
+
     const accessToken = jwt.sign(
       { userId: user._id, username: user.username, avatar: user.avatar, isOnline: true },
       JWT_SECRET,

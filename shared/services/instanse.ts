@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios';
 
 export const axiosInstance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL,
@@ -14,24 +14,24 @@ axiosInstance.interceptors.response.use(
       originalRequest._retry = true;
 
       try {
-        const refreshToken = localStorage.getItem("refreshToken");
+        const refreshToken = localStorage.getItem('refreshToken');
         if (!refreshToken) {
-          console.error("Refresh token отсутствует");
-          throw new Error("Refresh token отсутствует");
+          console.error('Refresh token отсутствует');
+          throw new Error('Refresh token отсутствует');
         }
 
         const { data } = await axiosInstance.post("/refreshToken", { refreshToken });
 
-        localStorage.setItem("accessToken", data.accessToken);
+        localStorage.setItem('accessToken', data.accessToken);
 
         originalRequest.headers.Authorization = `Bearer ${data.accessToken}`;
         return axiosInstance(originalRequest);
       } catch (refreshError) {
-        console.error("Ошибка обновления токена:", refreshError);
+        console.error('Ошибка обновления токена:', refreshError);
         return Promise.reject(refreshError);
       }
     }
 
     return Promise.reject(error);
-  }
+  },
 );

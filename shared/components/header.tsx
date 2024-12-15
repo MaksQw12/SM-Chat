@@ -31,9 +31,8 @@ export const Header: React.FC<Props> = ({ className, isAuth, user, logout }) => 
     <div
       className={cn(
         className,
-        "bg-[hsl(38,44%,76%)] w-full h-[90px] flex align-center justify-between"
-      )}
-    >
+        'bg-[hsl(38,44%,76%)] w-full h-[90px] flex align-center justify-between',
+      )}>
       <Container className="flex justify-between">
         {/* Левая часть */}
         <div
@@ -41,7 +40,7 @@ export const Header: React.FC<Props> = ({ className, isAuth, user, logout }) => 
           onClick={() => (window.location.href = "/")}
         >
           <img src="1.png" alt="logo" className="w-[80px]" />
-          <Title text={"SM-Chat"} size="lg" className="font-bold" />
+          <Title text={'SM-Chat'} size="lg" className="font-bold" />
         </div>
         {/* Правая часть */}
         <div className="flex items-center">
@@ -72,14 +71,8 @@ export const Header: React.FC<Props> = ({ className, isAuth, user, logout }) => 
             </DropdownMenu>
           ) : (
             <>
-              <AuthModal
-                open={openAuthModal}
-                onClose={() => setOpenAuthModal(false)}
-              />
-              <Button
-                variant={"default"}
-                onClick={() => setOpenAuthModal(true)}
-              >
+              <AuthModal open={openAuthModal} onClose={() => setOpenAuthModal(false)} />
+              <Button variant={'default'} onClick={() => setOpenAuthModal(true)}>
                 <User className="mr-0" size={20} /> Войти
               </Button>
             </>
