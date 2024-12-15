@@ -25,6 +25,7 @@ export const RegisterForm: React.FC<Props> = ({ onClose }) => {
     try {
       const resp = await regUser(data.username, data.password);
       if (resp.status !== 201) throw Error("");
+      console.log(resp.data);
       onClose?.();
       toast.success("Вы успешно зарегистрировались", { icon: "👋" });
     } catch (error) {
@@ -42,14 +43,14 @@ export const RegisterForm: React.FC<Props> = ({ onClose }) => {
           <div className="flex justify-between items-center">
             <div className="flex flex-col">
               <Title text="Регистрация" size="md" className="font-bold mb-4" />
-              <p className="text-gray-400 text-base">
+              <p className="text-[#f1eadd] text-base">
                 Пожалуйста заполните все поля для успешного создания аккаунта.
               </p>
             </div>
-            <img src="auth.png" alt="auth" className="max-w-[150px]" />
+            <img src="6.png" alt="auth" className="max-w-[170px] ml-2" />
           </div>
 
-          <span className="block h-1 bg-blue-500 my-4 mb-8"></span>
+          <span className="block h-1 bg-[hsl(38,27%,65%)] my-4 mb-8"></span>
         </div>
         <FormInput name="username" label="Имя пользователя" required />
         <FormInput name="password" label="Пароль" type="password" required />
