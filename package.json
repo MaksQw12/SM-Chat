@@ -26,8 +26,10 @@
     "react-dom": "^19.0.0",
     "react-hook-form": "^7.54.1",
     "react-hot-toast": "^2.4.1",
+    "socket.io": "^4.8.1",
     "tailwind-merge": "^2.5.5",
     "tailwindcss-animate": "^1.0.7",
+    "ws": "^8.18.0",
     "zod": "^3.24.1"
   },
   "devDependencies": {
@@ -37,6 +39,8 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@types/socket.io": "^3.0.1",
+    "@types/ws": "^8.5.13",
     "eslint": "^9",
     "eslint-config-next": "15.1.0",
     "postcss": "^8",
