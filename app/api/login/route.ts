@@ -21,13 +21,13 @@ export async function POST(req: NextRequest) {
 
     if (!user) {
       // Возвращаем ошибку 401, если пользователь не найден
-      return NextResponse.json({ message: 'User not found' }, { status: 401 });
+      return NextResponse.json({ message: 'User not found' }, { status: 405 });
     }
 
     const isPasswordValid = await bcrypt.compare(password, user.password);
 
     if (!isPasswordValid) {
-      return NextResponse.json({ message: 'Invalid password' }, { status: 401 });
+      return NextResponse.json({ message: 'Invalid password' }, { status: 406 });
     }
 
     await User.findOneAndUpdate({ _id: user._id }, { isOnline: true });

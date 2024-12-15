@@ -24,6 +24,14 @@ export const LoginForm: React.FC<Props> = ({ onClose }) => {
   const onSubmit = async (data: FormLoginSchema) => {
     try {
       const resp = await loginUser(data.username, data.password);
+      if (resp.status === 405) {
+        toast.error('Пользователь не найден', { icon: '❌' });
+        return
+      } ;
+      if (resp.status === 406) {
+        toast.error('Неправильный пароль', { icon: '❌' });
+        return
+      } ;
       if (resp.status !== 200) throw Error();
       if (!resp.data.accessToken || !resp.data.refreshToken) throw Error();
       localStorage.setItem("accessToken", resp.data.accessToken);
