@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-interface DecodedUser {
+export interface DecodedUser {
   userId: string;
   username: string;
 }

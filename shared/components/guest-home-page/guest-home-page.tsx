@@ -1,4 +1,5 @@
 import React from "react";
+import { Container } from "../ui/container";
 
 interface Props {
   className?: string;
@@ -7,7 +8,9 @@ interface Props {
 export const GuestHomePage: React.FC<Props> = ({ className }) => {
   return (
     <div className={className}>
-      {/* Your component content here */}
+      <Container>
+        <h1>Guest Home Page</h1>
+      </Container>
     </div>
   );
 };

@@ -5,8 +5,6 @@ interface Tokens {
 export const useTokens = (): Tokens | null => {
   const accessToken = localStorage.getItem("accessToken");
   const refreshToken = localStorage.getItem("refreshToken");
-  if (accessToken && refreshToken) {
-    return { accessToken, refreshToken };
-  }
-  return null;
+
+  return accessToken && refreshToken ? { accessToken, refreshToken } : null;
 };
